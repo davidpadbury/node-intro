@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<style>
+			#counter {
+				text-align: center;
+				font-size: 144px;
+			}
+		</style>
+		<script>
+			$(function() {
+
+				var socket = new io.Socket(),
+					counter = $('#counter');
+
+				socket.on('message', function(msg) {
+					counter.text(msg);
+				});
+
+				socket.connect();
+
+			});
+		</script>
+	</head>
+	<body>
+		<div id="counter"></div>
+	</body>
+</html>
