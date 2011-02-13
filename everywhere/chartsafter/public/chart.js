@@ -38,4 +38,4 @@
 		};
 	}
 
-})(window.demo || (window.demo = {}));
+})(typeof window !== 'undefined' ? (window.demo = {}) : exports);
