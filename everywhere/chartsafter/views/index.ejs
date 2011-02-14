@@ -32,13 +32,11 @@
 	<body>
 
 		<form>
-			<input id="data" name="d" value="<%= data || '5,2,7,3,6' %>" placeholder="data" />
+			<input id="data" name="d" value="5,2,7,3,6" placeholder="data" />
 			<input type="submit" value="Chart" />
 		</form>
 		<div id="chart">
-			<% if (data) { %>
-			<img alt="Graph" src="/graph?d=<%= data %>" />
-			<% } %>
+
 		</div>
 	</body>
 </html>
