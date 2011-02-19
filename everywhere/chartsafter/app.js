@@ -18,7 +18,7 @@ server.get('/', function(req, res) {
 		});
 });
 
-server.get('/graph', function(req, res) {
+server.get('/graph.png', function(req, res) {
 		var data = req.query.d,
 			options = chart.createChartOptions( data );
 
