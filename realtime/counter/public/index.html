@@ -10,8 +10,22 @@
 				font-size: 144px;
 			}
 		</style>
+		<script>
+			$(function() {
+
+				var socket = new io.Socket(),
+					counter = $('#counter');
+
+				socket.on('message', function(msg) {
+					counter.text(msg);
+				});
+
+				socket.connect();
+
+			});
+		</script>
 	</head>
 	<body>
-		
+		<div id="counter"></div>
 	</body>
 </html>
