@@ -23,7 +23,7 @@ function createHighchartsWindow(callback) {
 	};
 	
 	// Load scripts
-	jsdom.jQueryify(window, function(w,jq) {
+	jsdom.jQueryify(window, 'http://code.jquery.com/jquery-1.4.2.min.js', function(w,jq) {
 		var filename = 'file:///' + __dirname + '/highcharts/highcharts.src.js';
 		script.src = filename;
 		script.onload = function() {
