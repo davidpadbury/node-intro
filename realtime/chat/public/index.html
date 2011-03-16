@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">		
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">		
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/ui-lightness/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
 		<script src="/json2.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
 		<script>
 			$(function() {
+
+        var userName;
+
+        $('#name-dialog > form').submit(function() {
+          userName = $('#name-dialog input[name="name"]').val();
+          $(dialog).dialog('close'); 
+          return false;
+        });
+
+        var dialog = $('#name-dialog').dialog({
+            modal: true,
+            resizable: false,
+            buttons: [{
+              text: 'OK',
+              click: function() { $('#name-dialog > form').submit(); }
+            }]
+          }); 
 
 				var socket = new io.Socket(),
 					clients = $('#clients'),
@@ -22,7 +42,10 @@
 							break;
 
 						case "msg":
-							$('<li />').text(data.arg).prependTo(msgs);
+							$('<li />')
+                .append($('<div class="sender"/>').text(data.arg.sender))
+                .append($('<div class="message"/>').text(data.arg.message))
+                .appendTo(msgs);
 							break;
 					}
 				});
@@ -31,23 +54,32 @@
 					e.preventDefault();
 					socket.send(JSON.stringify({
 						command: 'msg',
-						arg: msg.val()
+						arg: {
+              sender: userName,
+              message: msg.val()
+            }
 					}));
 					msg.val('');
 				});
 
 				socket.connect();
-
 			});
-		</script>
+   </script>
 	</head>
 	<body>
+    <div id="name-dialog" class="dialog">
+      <form>
+        <p>
+          <label for="name">Name:</label>
+          <input name="name" type="text"/>
+        </p>
+      </form>
+    </div>
+		<div id="clients"></div>
+		<ul id="msgs"></ul>
 		<form id="msg-form">
 			<input id="msg" placeholder="message" autofocus autocomplete="off" />
 			<input type="submit" value="Send" />
 		</form>
-		<div id="clients"></div>
-		<ul id="msgs">
-		</ul>
 	</body>
 </html>

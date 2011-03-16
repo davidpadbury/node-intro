@@ -1,8 +1,10 @@
+require.paths.unshift('/usr/local/lib/node')
+
 var connect = require('connect'),
 		io = require('socket.io');
 
 var server = connect.createServer(
-		connect.staticProvider(__dirname + '/public')
+		connect.static(__dirname + '/public')
 );
 
 var socket = io.listen(server),
@@ -31,5 +33,5 @@ socket.on('connection', function(client) {
 });
 
 
-server.listen(80);
-console.log('Server started on 80');
+server.listen(8000);
+console.log('Server started on 8000');
