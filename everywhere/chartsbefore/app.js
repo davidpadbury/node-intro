@@ -2,7 +2,7 @@ var express = require('express'),
 		server = express.createServer();
 
 server.configure(function() {
-		server.use( express.staticProvider(__dirname + '/public') );
+		server.use( express.static(__dirname + '/public') );
 		server.set('view engine', 'ejs');
 		server.set('view options', { layout: false });
 });
