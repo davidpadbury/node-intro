@@ -3,7 +3,7 @@ var jsdom = require('jsdom'),
 		document = window.document,
 		htmlEl = document.getElementsByTagName('html')[0];
 
-jsdom.jQueryify(window, function() {
+jsdom.jQueryify(window, 'http://code.jquery.com/jquery-latest.js', function() {
 		var $ = window.jQuery;
 		
 		$('<div />').addClass('servermade').appendTo('body');
