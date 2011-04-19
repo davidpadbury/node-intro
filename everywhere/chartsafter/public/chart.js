@@ -29,7 +29,7 @@
 				enabled: false
 			},
 			title: {
-				text: 'Hey CodeCamp!'
+				text: 'Hey ALT.NET New York!'
 			},
 			series: [{
 				data: values,
