@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+		<script src="/json2.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			$(function() {
+
+				var socket = new io.Socket(),
+					clients = $('#clients'),
+					msg = $('#msg'),
+					msgs = $('#msgs');
+
+				socket.on('message', function(msg) {
+					var data = JSON.parse(msg);
+
+					switch (data.command) {
+						case "counter":
+							clients.text(data.arg + ' client(s) connected');
+							break;
+
+						case "msg":
+							$('<li />').text(data.arg).prependTo(msgs);
+							break;
+					}
+				});
+
+				$('#msg-form').submit(function(e) {
+					e.preventDefault();
+					socket.send(JSON.stringify({
+						command: 'msg',
+						arg: msg.val()
+					}));
+					msg.val('');
+				});
+
+				socket.connect();
+
+			});
+		</script>
+	</head>
+	<body>
+		<form id="msg-form">
+			<input id="msg" placeholder="message" autofocus autocomplete="off" />
+			<input type="submit" value="Send" />
+		</form>
+		<div id="clients"></div>
+		<ul id="msgs">
+		</ul>
+	</body>
+</html>
