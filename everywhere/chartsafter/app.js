@@ -35,5 +35,5 @@ server.get('/graph', function(req, res) {
 		});
 });
 
-server.listen(3000);
-console.log('server listening on 3000');
+server.listen(3001);
+console.log('server listening on 3001');

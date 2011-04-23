@@ -7,25 +7,28 @@
 			#chart { width: 300px; height: 300px; }
 		</style>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+		<script src="/modernizr-1.7.min.js"></script>
 		<script src="/highcharts.src.js"></script>
 		<script src="/chart.js"></script>
 		<script>
 			var chart = null;
 
 			$(function() {
-				$('form').submit(function(e) {
-					e.preventDefault();
+				if (Modernizr.svg) {
+					$('form').submit(function(e) {
+						e.preventDefault();
 
-					if (chart) {
-						chart.destroy();
-					}
-					var data = $('#data').val(),
-						options = demo.createChartOptions(data);
+						if (chart) {
+							chart.destroy();
+						}
+						var data = $('#data').val(),
+							options = demo.createChartOptions(data);
 
-					options.chart.renderTo = 'chart';
+						options.chart.renderTo = 'chart';
 
-					chart = new Highcharts.Chart(options);
-				});
+						chart = new Highcharts.Chart(options);
+					});
+				}
 			});
 		</script>
 	</head>
