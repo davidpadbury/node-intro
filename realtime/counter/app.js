@@ -5,5 +5,5 @@ var server = connect.createServer(
 		connect.staticProvider(__dirname + '/public')
 );
 
-server.listen(3000);
-console.log('Server started on 3000');
+server.listen(3002);
+console.log('Server started on 3002');
