@@ -30,6 +30,5 @@ socket.on('connection', function(client) {
 
 });
 
-
-server.listen(3003);
-console.log('Server started on 3003');
+server.listen(3004);
+console.log('Server started on 3004');
