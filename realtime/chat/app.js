@@ -31,5 +31,5 @@ socket.on('connection', function(client) {
 });
 
 
-server.listen(80);
-console.log('Server started on 80');
+server.listen(3003);
+console.log('Server started on 3003');
