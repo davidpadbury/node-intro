@@ -1,10 +1,6 @@
 /*
     http://www.JSON.org/json2.js
-<<<<<<< HEAD
-    2011-01-18
-=======
     2011-02-23
->>>>>>> 146558d... updated port and styles
 
     Public Domain.
 
@@ -319,13 +315,8 @@ if (!JSON) {
             if (rep && typeof rep === 'object') {
                 length = rep.length;
                 for (i = 0; i < length; i += 1) {
-<<<<<<< HEAD
-                    k = rep[i];
-                    if (typeof k === 'string') {
-=======
                     if (typeof rep[i] === 'string') {
                         k = rep[i];
->>>>>>> 146558d... updated port and styles
                         v = str(k, value);
                         if (v) {
                             partial.push(quote(k) + (gap ? ': ' : ':') + v);
@@ -337,11 +328,7 @@ if (!JSON) {
 // Otherwise, iterate through all of the keys in the object.
 
                 for (k in value) {
-<<<<<<< HEAD
-                    if (Object.hasOwnProperty.call(value, k)) {
-=======
                     if (Object.prototype.hasOwnProperty.call(value, k)) {
->>>>>>> 146558d... updated port and styles
                         v = str(k, value);
                         if (v) {
                             partial.push(quote(k) + (gap ? ': ' : ':') + v);
@@ -426,11 +413,7 @@ if (!JSON) {
                 var k, v, value = holder[key];
                 if (value && typeof value === 'object') {
                     for (k in value) {
-<<<<<<< HEAD
-                        if (Object.hasOwnProperty.call(value, k)) {
-=======
                         if (Object.prototype.hasOwnProperty.call(value, k)) {
->>>>>>> 146558d... updated port and styles
                             v = walk(value, k);
                             if (v !== undefined) {
                                 value[k] = v;
