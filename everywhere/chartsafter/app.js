@@ -4,7 +4,7 @@ var express = require('express'),
 		server = express.createServer();
 
 server.configure(function() {
-		server.use( express.staticProvider(__dirname + '/public') );
+		server.use( express.static(__dirname + '/public') );
 		server.use( express.errorHandler({ showStack: true, dumpExceptions: true }));
 		server.set('view engine', 'ejs');
 		server.set('view options', { layout: false });
