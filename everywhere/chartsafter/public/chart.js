@@ -29,7 +29,7 @@
 				enabled: false
 			},
 			title: {
-				text: 'Hey ALT.NET!'
+				text: 'Hey CT Dot Net!'
 			},
 			series: [{
 				data: values,
