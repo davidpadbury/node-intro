@@ -1,0 +1,9 @@
+{
+	"name":"chart-before",
+	"version":"0.0.1",
+	"dependencies":{
+		"express":"2.4.x",
+		"ejs":"0.4.x",
+		"jsdom":"0.2.x"
+	}
+}
