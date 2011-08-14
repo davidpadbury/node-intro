@@ -17,36 +17,24 @@
 		<script>
 			$(function() {
 
-				var socket = new io.Socket(),
+				var socket = io.connect(),
 					clients = $('#clients'),
 					msg = $('#msg'),
 					msgs = $('#msgs');
 
-				socket.on('message', function(msg) {
-					var data = JSON.parse(msg);
+				socket.on('counter-changed', function(counter) {
+					clients.text(counter + ' client(s) connected');
+				});
 
-					switch (data.command) {
-						case "counter":
-							clients.text(data.arg + ' client(s) connected');
-							break;
-
-						case "msg":
-							$('<li />').text(data.arg).prependTo(msgs);
-							break;
-					}
+				socket.on('msg', function(msg) {
+					$('<li>').text(msg).prependTo(msgs);
 				});
 
 				$('#msg-form').submit(function(e) {
 					e.preventDefault();
-					socket.send(JSON.stringify({
-						command: 'msg',
-						arg: msg.val()
-					}));
+					socket.emit('msg', msg.val());
 					msg.val('');
 				});
-
-				socket.connect();
-
 			});
 		</script>
 	</head>

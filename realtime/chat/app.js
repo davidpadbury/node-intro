@@ -1,31 +1,27 @@
-var connect = require('connect'),
-		io = require('socket.io');
+var connect = require('connect');
 
 var server = connect.createServer(
 		connect.static(__dirname + '/public')
 );
 
-var socket = io.listen(server),
+var io = require('socket.io').listen(server),
 		counter = 0,
 		updateCounters = function() {
-			socket.broadcast(JSON.stringify({
-				command: 'counter',
-				arg: counter
-			}));	
+			io.sockets.emit('counter-changed', counter);
 		};
 
-socket.on('connection', function(client) {
+io.sockets.on('connection', function(socket) {
 
 	counter = counter + 1;
 	updateCounters();
 
-	client.on('disconnect', function() {
+	socket.on('disconnect', function() {
 		counter = counter - 1;
 		updateCounters();
 	});
 
-	client.on('message', function(msg) {
-		socket.broadcast(msg);
+	socket.on('msg', function(msg) {
+		io.sockets.emit('msg', msg);
 	});
 
 });
